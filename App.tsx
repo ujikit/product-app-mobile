@@ -1,118 +1,87 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useEffect, useMemo} from 'react';
+import {Provider, useDispatch, useSelector} from 'react-redux';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import store from './src/redux/store';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import ProductItem from './src/components/ProductItem';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+function ProductList() {
+  const dispatch = useDispatch();
+  const {products, cart, selectedProductOnCartReducer} = useSelector(
+    state => state.cart,
+  );
+  const memoizedProducts = useMemo(() => products, [products]);
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  useEffect(() => {
+    dispatch({type: 'cart/fetchProducts'});
+  }, [dispatch]);
+
+  console.log('home');
+
+  const totalSelectedPrice = useMemo(() => {
+    return products.reduce((sum, product) => {
+      const isChecked = selectedProductOnCartReducer[product.id];
+      const qty = cart[product.id] || 0;
+      if (isChecked && qty > 0) {
+        return sum + qty * product.price;
+      }
+      return sum;
+    }, 0);
+  }, [products, cart, selectedProductOnCartReducer]);
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View>
+      <Text>My Cart</Text>
+      <FlatList
+        data={memoizedProducts}
+        keyExtractor={(_, index) => index.toString()}
+        contentContainerStyle={{paddingBottom: 150}}
+        renderItem={({item}) => <ProductItem key={item.id} product={item} />}
+      />
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          position: 'absolute',
+          bottom: 0,
+          backgroundColor: 'white',
+          width: '100%',
+          height: 110,
+          borderWidth: 0.5,
+          borderColor: '#ccc',
+          padding: 25,
+        }}>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <Text style={{fontSize: 16}}>Total: Rp {totalSelectedPrice}K</Text>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <View style={{alignItems: 'flex-end'}}>
+            <TouchableOpacity style={{backgroundColor: '#f60'}}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: 'bold',
+                  color: '#fff',
+                  paddingVertical: 10,
+                  paddingHorizontal: 25,
+                }}>
+                Checkout
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+function App() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Provider store={store}>
+      <ProductList />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
