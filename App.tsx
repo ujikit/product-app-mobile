@@ -5,6 +5,9 @@ import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import store from './src/redux/store';
 
 import ProductItem from './src/components/ProductItem';
+import {COLORS} from './src/configs';
+import Header from './src/components/Header';
+import {ArrowLeftIcon} from './src/svgs';
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -32,7 +35,14 @@ function ProductList() {
 
   return (
     <View>
-      <Text>My Cart</Text>
+      <Header
+        title="My Cart"
+        leftIcon={
+          <TouchableOpacity>
+            <ArrowLeftIcon width="24" height="24" />
+          </TouchableOpacity>
+        }
+      />
       <FlatList
         data={memoizedProducts}
         keyExtractor={(_, index) => index.toString()}
@@ -57,7 +67,7 @@ function ProductList() {
         </View>
         <View style={{flex: 1, justifyContent: 'center'}}>
           <View style={{alignItems: 'flex-end'}}>
-            <TouchableOpacity style={{backgroundColor: '#f60'}}>
+            <TouchableOpacity style={{backgroundColor: COLORS.primary}}>
               <Text
                 style={{
                   fontSize: 15,

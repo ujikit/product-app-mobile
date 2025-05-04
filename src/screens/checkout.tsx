@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
+import {COLORS} from '../configs';
 
 const cartItems = [
   {
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   headerTitle: {fontSize: 18, fontWeight: 'bold'},
-  edit: {color: '#f60'},
+  edit: {color: COLORS.primary},
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -141,9 +142,9 @@ const styles = StyleSheet.create({
   footerLeft: {flexDirection: 'row', alignItems: 'center'},
   selectAll: {marginLeft: 8},
   footerRight: {flexDirection: 'row', alignItems: 'center', gap: 10},
-  totalPrice: {color: '#f60', fontWeight: 'bold'},
+  totalPrice: {color: COLORS.primary, fontWeight: 'bold'},
   checkoutBtn: {
-    backgroundColor: '#f60',
+    backgroundColor: COLORS.primary,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 6,
