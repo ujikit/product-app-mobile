@@ -99,8 +99,7 @@ const DetailScreenStyles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     width: '100%',
-    paddingVertical: 10,
-    paddingHorizontal: 8,
+    height: 80,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderTopWidth: 1,
@@ -118,10 +117,10 @@ const DetailScreenStyles = StyleSheet.create({
   },
   buttonCenter: {
     flex: 1,
-    marginHorizontal: 5,
+    justifyContent: 'center',
+    height: '100%',
     backgroundColor: '#26a69a',
     paddingVertical: 12,
-    borderRadius: 8,
     alignItems: 'center',
   },
   centerText: {
@@ -130,10 +129,10 @@ const DetailScreenStyles = StyleSheet.create({
   },
   buttonRight: {
     flex: 1,
-    marginLeft: 5,
+    justifyContent: 'center',
+    height: '100%',
     backgroundColor: '#f44336',
     paddingVertical: 12,
-    borderRadius: 8,
     alignItems: 'center',
   },
   rightText: {

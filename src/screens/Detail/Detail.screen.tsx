@@ -2,8 +2,8 @@
 import React from 'react';
 import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 
-import {ArrowLeftIcon, CartIcon} from '../../svgs';
 import Header from '../../components/Header';
+import {ArrowLeftIcon, CartIcon} from '../../svgs';
 
 import styles from './Detail.styles';
 import DetailScreenLogic from './Detail.logic';
