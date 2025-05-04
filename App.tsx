@@ -1,97 +1,23 @@
-import React, {useEffect, useMemo} from 'react';
-import {Provider, useDispatch, useSelector} from 'react-redux';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
+import React from 'react';
+import {Provider} from 'react-redux';
 import store from './src/redux/store';
+import {StatusBar} from 'react-native';
 
-import ProductItem from './src/components/ProductItem';
-import {COLORS} from './src/configs';
-import Header from './src/components/Header';
-import {ArrowLeftIcon} from './src/svgs';
+import NavigationApp from './src/routers';
 
-function ProductList() {
-  const dispatch = useDispatch();
-  const {products, cart, selectedProductOnCartReducer} = useSelector(
-    state => state.cart,
-  );
-  const memoizedProducts = useMemo(() => products, [products]);
-
-  useEffect(() => {
-    dispatch({type: 'cart/fetchProducts'});
-  }, [dispatch]);
-
-  console.log('home');
-
-  const totalSelectedPrice = useMemo(() => {
-    return products.reduce((sum, product) => {
-      const isChecked = selectedProductOnCartReducer[product.id];
-      const qty = cart[product.id] || 0;
-      if (isChecked && qty > 0) {
-        return sum + qty * product.price;
-      }
-      return sum;
-    }, 0);
-  }, [products, cart, selectedProductOnCartReducer]);
-
-  return (
-    <View>
-      <Header
-        title="My Cart"
-        leftIcon={
-          <TouchableOpacity>
-            <ArrowLeftIcon width="24" height="24" />
-          </TouchableOpacity>
-        }
-      />
-      <FlatList
-        data={memoizedProducts}
-        keyExtractor={(_, index) => index.toString()}
-        contentContainerStyle={{paddingBottom: 150}}
-        renderItem={({item}) => <ProductItem key={item.id} product={item} />}
-      />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          position: 'absolute',
-          bottom: 0,
-          backgroundColor: 'white',
-          width: '100%',
-          height: 110,
-          borderWidth: 0.5,
-          borderColor: '#ccc',
-          padding: 25,
-        }}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={{fontSize: 16}}>Total: Rp {totalSelectedPrice}K</Text>
-        </View>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <View style={{alignItems: 'flex-end'}}>
-            <TouchableOpacity style={{backgroundColor: COLORS.primary}}>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  color: '#fff',
-                  paddingVertical: 10,
-                  paddingHorizontal: 25,
-                }}>
-                Checkout
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-}
-
-function App() {
-  return (
-    <Provider store={store}>
-      <ProductList />
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <StatusBar animated={true} barStyle="dark-content" />
+    <NavigationApp />
+  </Provider>
+);
 
 export default App;

@@ -1,50 +1,33 @@
-import React, {useEffect, useMemo} from 'react';
-import {Provider, useDispatch, useSelector} from 'react-redux';
+//package import here
+import React from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
-import store from './src/redux/store';
+import {COLORS} from '../../configs';
+import {ArrowLeftIcon} from '../../svgs';
+import Header from '../../components/Header';
+import ProductItem from '../../components/ProductItem';
 
-import ProductItem from './src/components/ProductItem';
-import {COLORS} from './src/configs';
-import Header from './src/components/Header';
-import {ArrowLeftIcon} from './src/svgs';
+import styles from './Cart.styles';
+import CartScreenLogic from './Cart.logic';
+import {CartScreenProps} from './Cart.types';
 
-function ProductList() {
-  const dispatch = useDispatch();
-  const {products, cart, selectedProductOnCartReducer} = useSelector(
-    state => state.cart,
-  );
-  const memoizedProducts = useMemo(() => products, [products]);
+const CartScreenScreen = (props: CartScreenProps) => {
+  const {navigation} = props;
 
-  useEffect(() => {
-    dispatch({type: 'cart/fetchProducts'});
-  }, [dispatch]);
-
-  console.log('home');
-
-  const totalSelectedPrice = useMemo(() => {
-    return products.reduce((sum, product) => {
-      const isChecked = selectedProductOnCartReducer[product.id];
-      const qty = cart[product.id] || 0;
-      if (isChecked && qty > 0) {
-        return sum + qty * product.price;
-      }
-      return sum;
-    }, 0);
-  }, [products, cart, selectedProductOnCartReducer]);
+  const {data} = CartScreenLogic(props);
 
   return (
     <View>
       <Header
         title="My Cart"
         leftIcon={
-          <TouchableOpacity>
+          <TouchableOpacity onPress={navigation.goBack}>
             <ArrowLeftIcon width="24" height="24" />
           </TouchableOpacity>
         }
       />
       <FlatList
-        data={memoizedProducts}
+        data={data.memoizedProducts}
         keyExtractor={(_, index) => index.toString()}
         contentContainerStyle={{paddingBottom: 150}}
         renderItem={({item}) => <ProductItem key={item.id} product={item} />}
@@ -63,7 +46,9 @@ function ProductList() {
           padding: 25,
         }}>
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={{fontSize: 16}}>Total: Rp {totalSelectedPrice}K</Text>
+          <Text style={{fontSize: 16}}>
+            Total: Rp {data.totalSelectedPrice}K
+          </Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center'}}>
           <View style={{alignItems: 'flex-end'}}>
@@ -84,6 +69,6 @@ function ProductList() {
       </View>
     </View>
   );
-}
+};
 
-export default ProductList;
+export default CartScreenScreen;
