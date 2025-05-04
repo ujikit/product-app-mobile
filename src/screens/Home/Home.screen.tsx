@@ -8,7 +8,11 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
+import HomeScreenLogic from './Home.logic';
+import {CartIcon} from '../../svgs';
+import {COLORS} from '../../configs';
 
 const products = [
   {
@@ -46,42 +50,69 @@ const products = [
   // Add more product entries as needed
 ];
 
-export default function App() {
+export default function App(props) {
+  const {actions, data} = HomeScreenLogic(props);
+
   return (
     <View style={styles.container}>
-      <TextInput placeholder="Search..." style={styles.searchBar} />
-
-      <ScrollView>
-        <View style={styles.banner}>
-          <Text style={styles.bannerText}>PROMO PUNCAK 5.5</Text>
+      <SafeAreaView>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={actions.goSearchScreen}
+            style={styles.searchBar}>
+            <Text>Search...</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={actions.goCartScreen}
+            style={{width: '15%', alignItems: 'center'}}>
+            <CartIcon width={30} height={30} fill={COLORS.primary} />
+          </TouchableOpacity>
         </View>
 
-        <FlatList
-          data={products}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          columnWrapperStyle={styles.row}
-          renderItem={({item}) => (
-            <TouchableOpacity style={styles.card}>
-              <Image
-                source={{uri: item.image}}
-                style={styles.image}
-                resizeMode="contain"
-              />
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.price}>{item.price}</Text>
-              <Text style={styles.rating}>⭐ {item.rating}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      </ScrollView>
-
+        <ScrollView>
+          <FlatList
+            data={products}
+            keyExtractor={item => item.id}
+            numColumns={2}
+            columnWrapperStyle={styles.row}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                onPress={() => actions.goDetailScreen()}
+                style={styles.card}>
+                <Image
+                  source={{uri: item.image}}
+                  style={styles.image}
+                  resizeMode="contain"
+                />
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>{item.price}</Text>
+                <Text style={styles.rating}>⭐ {item.rating}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.tabBar}>
-        <Text style={styles.tabItem}>Beranda</Text>
-        <Text style={styles.tabItem}>Trending</Text>
-        <Text style={styles.tabItem}>Live</Text>
-        <Text style={styles.tabItem}>Notifikasi</Text>
-        <Text style={styles.tabItem}>Saya</Text>
+        <View style={styles.wrapTextTab}>
+          <Text style={styles.textTab}>Home</Text>
+        </View>
+        <View style={styles.wrapTextTab}>
+          <Text style={styles.textTab}>Trending</Text>
+        </View>
+        <View style={styles.wrapTextTab}>
+          <Text style={styles.textTab}>Live</Text>
+        </View>
+        <View style={styles.wrapTextTab}>
+          <Text style={styles.textTab}>Notifikasi</Text>
+        </View>
+        <View style={styles.wrapTextTab}>
+          <Text style={styles.textTab}>Saya</Text>
+        </View>
       </View>
     </View>
   );
@@ -94,6 +125,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   searchBar: {
+    flex: 1,
     backgroundColor: '#f0f0f0',
     margin: 10,
     padding: 10,
@@ -144,14 +176,25 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   tabBar: {
+    position: 'absolute',
+    bottom: 0,
     flexDirection: 'row',
-    justifyContent: 'space-around',
     padding: 10,
     borderTopWidth: 1,
     borderTopColor: '#eee',
     backgroundColor: '#fff',
+    width: '100%',
+    height: 80,
   },
-  tabItem: {
+  wrapTextTab: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderLeftWidth: 0.2,
+    borderRightWidth: 0.2,
+    borderColor: '#999',
+  },
+  textTab: {
     fontSize: 12,
     color: '#333',
   },

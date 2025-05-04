@@ -10,14 +10,16 @@ import DetailScreenLogic from './Detail.logic';
 import {DetailScreenProps} from './Detail.types';
 
 const DetailScreenScreen = (props: DetailScreenProps) => {
-  DetailScreenLogic(props);
+  const {navigation} = props;
+
+  const {} = DetailScreenLogic(props);
 
   return (
     <View style={styles.container}>
       <Header
         title="Product Detail"
         leftIcon={
-          <TouchableOpacity>
+          <TouchableOpacity onPress={navigation.goBack}>
             <ArrowLeftIcon width="24" height="24" />
           </TouchableOpacity>
         }

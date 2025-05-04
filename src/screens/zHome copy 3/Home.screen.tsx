@@ -6,7 +6,7 @@ import styles from './Home.styles';
 import HomeScreenLogic from './Home.logic';
 import {HomeScreenProps} from './Home.types';
 
-const HomeScreenScreen = (props: HomeScreenProps) => {
+const HomeScreen = (props: HomeScreenProps) => {
   HomeScreenLogic(props);
 
   return (
@@ -16,4 +16,4 @@ const HomeScreenScreen = (props: HomeScreenProps) => {
   );
 };
 
-export default HomeScreenScreen;
+export default HomeScreen;

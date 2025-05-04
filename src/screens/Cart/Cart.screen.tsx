@@ -1,6 +1,6 @@
 //package import here
 import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 
 import {COLORS} from '../../configs';
 import {ArrowLeftIcon} from '../../svgs';
@@ -17,7 +17,7 @@ const CartScreenScreen = (props: CartScreenProps) => {
   const {data} = CartScreenLogic(props);
 
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
       <Header
         title="My Cart"
         leftIcon={
