@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  TextInput,
   FlatList,
   Image,
   StyleSheet,
@@ -10,45 +9,11 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import HomeScreenLogic from './Home.logic';
+
 import {CartIcon} from '../../svgs';
 import {COLORS} from '../../configs';
 
-const products = [
-  {
-    id: '1',
-    title: 'ECU All New Ertiga matic AT SGP',
-    price: 'Rp1.877.296',
-    rating: 5.0,
-    image:
-      'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp',
-  },
-  {
-    id: '2',
-    title: 'Cas Aki Motor / Charger Aki Accu 12 Volt',
-    price: 'Rp36.529',
-    rating: 4.6,
-    image:
-      'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp',
-  },
-  {
-    id: '3',
-    title: 'SETING HP ABSEN ONLINE VIA REMOTE',
-    price: 'Rp237.500',
-    rating: 5.0,
-    image:
-      'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp',
-  },
-  {
-    id: '3',
-    title: 'SETING HP ABSEN ONLINE VIA REMOTE',
-    price: 'Rp237.500',
-    rating: 5.0,
-    image:
-      'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp',
-  },
-  // Add more product entries as needed
-];
+import HomeScreenLogic from './Home.logic';
 
 export default function App(props) {
   const {actions, data} = HomeScreenLogic(props);
@@ -76,22 +41,35 @@ export default function App(props) {
 
         <ScrollView>
           <FlatList
-            data={products}
+            data={data.products}
             keyExtractor={item => item.id}
             numColumns={2}
             columnWrapperStyle={styles.row}
+            contentContainerStyle={{paddingBottom: 150}}
             renderItem={({item}) => (
               <TouchableOpacity
-                onPress={() => actions.goDetailScreen()}
+                onPress={() => actions.goDetailScreen(item)}
                 style={styles.card}>
                 <Image
-                  source={{uri: item.image}}
+                  source={{uri: item.images[0]}}
                   style={styles.image}
                   resizeMode="contain"
                 />
                 <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>{item.price}</Text>
-                <Text style={styles.rating}>⭐ {item.rating}</Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingTop: 20,
+                  }}>
+                  <View style={{flex: 1}}>
+                    <Text style={styles.rating}>⭐ {item.rating}</Text>
+                  </View>
+                  <View style={{flex: 1, alignItems: 'flex-end'}}>
+                    <Text style={styles.price}>{item.price}</Text>
+                  </View>
+                </View>
               </TouchableOpacity>
             )}
           />
@@ -111,7 +89,7 @@ export default function App(props) {
           <Text style={styles.textTab}>Notifikasi</Text>
         </View>
         <View style={styles.wrapTextTab}>
-          <Text style={styles.textTab}>Saya</Text>
+          <Text style={styles.textTab}>Profile</Text>
         </View>
       </View>
     </View>

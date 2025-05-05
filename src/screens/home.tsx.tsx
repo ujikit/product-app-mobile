@@ -81,7 +81,7 @@ export default function App() {
         <Text style={styles.tabItem}>Trending</Text>
         <Text style={styles.tabItem}>Live</Text>
         <Text style={styles.tabItem}>Notifikasi</Text>
-        <Text style={styles.tabItem}>Saya</Text>
+        <Text style={styles.tabItem}>Profile</Text>
       </View>
     </View>
   );

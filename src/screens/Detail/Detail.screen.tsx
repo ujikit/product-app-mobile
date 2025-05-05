@@ -12,7 +12,8 @@ import {DetailScreenProps} from './Detail.types';
 const DetailScreenScreen = (props: DetailScreenProps) => {
   const {navigation} = props;
 
-  const {} = DetailScreenLogic(props);
+  const {data} = DetailScreenLogic(props);
+  const {productDetail} = data;
 
   return (
     <View style={styles.container}>
@@ -27,19 +28,15 @@ const DetailScreenScreen = (props: DetailScreenProps) => {
       <ScrollView style={styles.scrollView} scrollEventThrottle={16}>
         <Image
           source={{
-            uri: 'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp',
+            uri: productDetail.images[0],
           }}
           style={styles.headerImage}
         />
         <View>
           <View style={styles.content}>
-            <Text style={styles.price}>Rp2.070.000</Text>
-            <Text style={styles.title}>
-              Laptop Dell Latitude 7490 i5 Gen 7 / 8GB / 512GB SSD
-            </Text>
-            <Text style={styles.subtitle}>
-              Kondisi mulus, seperti baru. Bergaransi dan bebas pengembalian.
-            </Text>
+            <Text style={styles.price}>{productDetail.price}</Text>
+            <Text style={styles.title}>{productDetail.title}</Text>
+            <Text style={styles.subtitle}>{productDetail.description}</Text>
 
             {/* <View style={styles.section}>
               <Text style={styles.sectionTitle}>Ulasan Pembeli</Text>

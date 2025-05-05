@@ -4,8 +4,10 @@
 import {DetailScreenProps} from './Detail.types';
 
 const DetailScreenLogic = (props: DetailScreenProps) => {
+  const productDetail = props.route.params;
+
   return {
-    data: {},
+    data: {productDetail},
     actions: {},
   };
 };

@@ -4,7 +4,8 @@ const HomeNavigator = (props: HomeScreenProps) => {
   const {navigation} = props;
 
   const goBack = () => navigation.goBack();
-  const goDetailScreen = () => navigation.navigate('DetailScreen');
+  const goDetailScreen = productDetail =>
+    navigation.navigate('DetailScreen', productDetail);
   const goSearchScreen = () => navigation.navigate('SearchScreen');
   const goCartScreen = () => navigation.navigate('CartScreen');
 
