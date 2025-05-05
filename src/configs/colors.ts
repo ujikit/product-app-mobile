@@ -84,6 +84,7 @@ const colors = {
   success_900: '#054F31',
 
   transparent: 'transparent',
+  disabled: '#9E9E9E',
 
   default: '#f6f6f6',
 };

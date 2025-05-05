@@ -48,16 +48,20 @@ const HomeScreenStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
-    alignItems: 'center',
   },
   image: {
     width: 100,
     height: 100,
+    alignSelf: 'center',
   },
   title: {
     fontSize: 12,
     fontWeight: '500',
-    marginVertical: 4,
+    marginTop: 4,
+  },
+  category: {
+    fontSize: 10,
+    color: COLORS.primary,
   },
   price: {
     color: 'red',

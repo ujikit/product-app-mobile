@@ -2,8 +2,17 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 
 import {setProductsDispatch} from '../reducers/productSlice';
 
-function* fetchProductsSaga() {
-  const res = yield call(fetch, 'https://dummyjson.com/products?limit=10');
+function* fetchProductsSaga(action) {
+  const limit = 30;
+  let endpoint = '';
+
+  if (action.payload === 'All') {
+    endpoint = `https://dummyjson.com/products?limit=${limit}`;
+  } else {
+    endpoint = `https://dummyjson.com/products/category/${action.payload}?limit=${limit}`;
+  }
+
+  const res = yield call(fetch, endpoint);
   const data = yield res.json();
   yield put(setProductsDispatch(data.products));
 }

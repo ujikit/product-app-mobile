@@ -1,5 +1,6 @@
 //package import
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../configs';
 
 //local import
 
@@ -131,7 +132,7 @@ const DetailScreenStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     height: '100%',
-    backgroundColor: '#f44336',
+    backgroundColor: COLORS.disabled,
     paddingVertical: 12,
     alignItems: 'center',
   },

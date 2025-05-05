@@ -1,7 +1,7 @@
 //package import here
 
 //local import here
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import HomeNavigator from './Home.navigator';
@@ -12,7 +12,7 @@ const HomeScreenLogic = (props: HomeScreenProps) => {
 
   const dispatch = useDispatch();
 
-  const {products} = useSelector(state => state.product);
+  const {products} = useSelector((state: any) => state.product);
 
   const {navigator} = HomeScreenLogic.dependencies;
 
@@ -20,13 +20,15 @@ const HomeScreenLogic = (props: HomeScreenProps) => {
     navigation,
   } as any);
 
+  const [currentCategory, setCurrentCategory] = useState('All');
+
   useEffect(() => {
-    dispatch({type: 'product/fetchProducts'});
-  }, [dispatch]);
+    dispatch({type: 'product/fetchProducts', payload: currentCategory});
+  }, [currentCategory, dispatch]);
 
   return {
-    data: {products},
-    actions: {goDetailScreen, goSearchScreen, goCartScreen},
+    data: {products, currentCategory},
+    actions: {goDetailScreen, goSearchScreen, goCartScreen, setCurrentCategory},
   };
 };
 

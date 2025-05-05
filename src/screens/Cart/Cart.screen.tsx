@@ -45,7 +45,7 @@ const CartScreenScreen = (props: CartScreenProps) => {
         </View>
         <View style={styles.wrapCheckout}>
           <View style={STYLES.alItEnd}>
-            <TouchableOpacity style={styles.buttonCheckout}>
+            <TouchableOpacity disabled={true} style={styles.buttonCheckout}>
               <Text style={styles.textCheckout}>Checkout</Text>
             </TouchableOpacity>
           </View>

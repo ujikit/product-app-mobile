@@ -27,7 +27,7 @@ const CartScreenStyles = StyleSheet.create({
   wrapTotal: {flex: 1, justifyContent: 'center'},
   textTotal: {fontSize: 16},
   wrapCheckout: {flex: 1, justifyContent: 'center'},
-  buttonCheckout: {backgroundColor: COLORS.primary},
+  buttonCheckout: {backgroundColor: COLORS.disabled},
   textCheckout: {
     fontSize: 15,
     fontWeight: 'bold',

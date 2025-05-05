@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import {CartIcon} from '../../svgs';
+import {DUMMY_DATA} from '../../constants';
 import {COLORS, STYLES} from '../../configs';
 
 import styles from './Home.styles';
@@ -35,6 +36,41 @@ export default function App(props) {
         </View>
 
         <ScrollView>
+          <View>
+            <FlatList
+              horizontal={true}
+              data={DUMMY_DATA.CATEGORY_LIST}
+              style={{marginHorizontal: 15, marginVertical: 10}}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  onPress={() => actions.setCurrentCategory(item.name)}
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginRight: 10,
+                    backgroundColor:
+                      item.name === data.currentCategory
+                        ? COLORS.primary
+                        : '#fff',
+                    paddingHorizontal: 10,
+                    padding: 5,
+                    borderRadius: 5,
+                    borderWidth:
+                      item.name === data.currentCategory ? null : 0.5,
+                  }}>
+                  <Text
+                    style={{
+                      color:
+                        item.name === data.currentCategory ? '#fff' : '#000',
+                      fontWeight: 'bold',
+                    }}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
           <FlatList
             data={data.products}
             keyExtractor={item => item.id}
@@ -51,6 +87,7 @@ export default function App(props) {
                   resizeMode="contain"
                 />
                 <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.category}>{item.category}</Text>
                 <View style={styles.wrapValue}>
                   <View style={STYLES.fx1}>
                     <Text style={styles.rating}>⭐ {item.rating}</Text>

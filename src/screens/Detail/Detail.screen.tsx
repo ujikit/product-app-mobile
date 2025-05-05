@@ -52,7 +52,7 @@ const DetailScreenScreen = (props: DetailScreenProps) => {
           <CartIcon width="30" height="30" fill="#fff" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonRight}>
+        <TouchableOpacity disabled={true} style={styles.buttonRight}>
           <Text style={styles.rightText}>Buy Now Rp{productDetail.price}</Text>
         </TouchableOpacity>
       </View>
