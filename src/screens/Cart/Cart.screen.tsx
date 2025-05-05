@@ -2,7 +2,7 @@
 import React from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
-import {COLORS} from '../../configs';
+import {STYLES} from '../../configs';
 import {ArrowLeftIcon} from '../../svgs';
 import Header from '../../components/Header';
 import ProductItem from '../../components/ProductItem';
@@ -17,7 +17,7 @@ const CartScreenScreen = (props: CartScreenProps) => {
   const {data} = CartScreenLogic(props);
 
   return (
-    <View style={{flex: 1, backgroundColor: '#fff'}}>
+    <View style={styles.container}>
       <Header
         title="My Cart"
         leftIcon={
@@ -29,45 +29,24 @@ const CartScreenScreen = (props: CartScreenProps) => {
       <FlatList
         data={data.memoizedCart}
         keyExtractor={(_, index) => index.toString()}
-        contentContainerStyle={{paddingBottom: 150}}
+        contentContainerStyle={styles.flatListContainer}
         ListEmptyComponent={() => (
-          <View>
+          <View style={styles.flatListEmpty}>
             <Text>Empty Cart</Text>
           </View>
         )}
         renderItem={({item}) => <ProductItem key={item.id} product={item} />}
       />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          position: 'absolute',
-          bottom: 0,
-          backgroundColor: 'white',
-          width: '100%',
-          height: 110,
-          borderWidth: 0.5,
-          borderColor: '#ccc',
-          padding: 25,
-        }}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={{fontSize: 16}}>
+      <View style={styles.wrapFooter}>
+        <View style={styles.wrapTotal}>
+          <Text style={styles.textTotal}>
             Total: Rp {data.totalSelectedPrice}K
           </Text>
         </View>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <View style={{alignItems: 'flex-end'}}>
-            <TouchableOpacity style={{backgroundColor: COLORS.primary}}>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  color: '#fff',
-                  paddingVertical: 10,
-                  paddingHorizontal: 25,
-                }}>
-                Checkout
-              </Text>
+        <View style={styles.wrapCheckout}>
+          <View style={STYLES.alItEnd}>
+            <TouchableOpacity style={styles.buttonCheckout}>
+              <Text style={styles.textCheckout}>Checkout</Text>
             </TouchableOpacity>
           </View>
         </View>
