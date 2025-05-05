@@ -9,10 +9,10 @@ import ProductItem from '../components/ProductItem';
 function ProductList() {
   const dispatch = useDispatch();
   const {products} = useSelector(state => state.cart);
-  const memoizedProducts = useMemo(() => products, [products]);
+  const memoizedCart = useMemo(() => products, [products]);
 
   useEffect(() => {
-    dispatch({type: 'cart/fetchProducts'});
+    dispatch({type: 'product/fetchProducts'});
   }, [dispatch]);
 
   console.log('home');
@@ -21,7 +21,7 @@ function ProductList() {
     <View>
       <Text>My Cart</Text>
       <FlatList
-        data={memoizedProducts}
+        data={memoizedCart}
         keyExtractor={(_, index) => index.toString()}
         contentContainerStyle={{paddingBottom: 100}}
         renderItem={({item}) => <ProductItem key={item.id} product={item} />}

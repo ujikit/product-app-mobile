@@ -3,6 +3,8 @@
 //local import here
 import {useDispatch} from 'react-redux';
 
+import {setCartDispatch} from '../../redux/reducers/cartSlice';
+
 import DetailNavigator from './Detail.navigator';
 import {DetailScreenProps} from './Detail.types';
 

@@ -27,9 +27,14 @@ const CartScreenScreen = (props: CartScreenProps) => {
         }
       />
       <FlatList
-        data={data.memoizedProducts}
+        data={data.memoizedCart}
         keyExtractor={(_, index) => index.toString()}
         contentContainerStyle={{paddingBottom: 150}}
+        ListEmptyComponent={() => (
+          <View>
+            <Text>Empty Cart</Text>
+          </View>
+        )}
         renderItem={({item}) => <ProductItem key={item.id} product={item} />}
       />
       <View

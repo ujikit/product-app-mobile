@@ -1,26 +1,22 @@
 import React, {useEffect, useMemo} from 'react';
-import {Provider, useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
-import store from './src/redux/store';
-
-import ProductItem from './src/components/ProductItem';
 import {COLORS} from './src/configs';
-import Header from './src/components/Header';
 import {ArrowLeftIcon} from './src/svgs';
+import Header from './src/components/Header';
+import ProductItem from './src/components/ProductItem';
 
 function ProductList() {
   const dispatch = useDispatch();
   const {products, cart, selectedProductOnCartReducer} = useSelector(
     state => state.cart,
   );
-  const memoizedProducts = useMemo(() => products, [products]);
+  const memoizedCart = useMemo(() => products, [products]);
 
   useEffect(() => {
-    dispatch({type: 'cart/fetchProducts'});
+    dispatch({type: 'product/fetchProducts'});
   }, [dispatch]);
-
-  console.log('home');
 
   const totalSelectedPrice = useMemo(() => {
     return products.reduce((sum, product) => {
@@ -44,7 +40,7 @@ function ProductList() {
         }
       />
       <FlatList
-        data={memoizedProducts}
+        data={memoizedCart}
         keyExtractor={(_, index) => index.toString()}
         contentContainerStyle={{paddingBottom: 150}}
         renderItem={({item}) => <ProductItem key={item.id} product={item} />}

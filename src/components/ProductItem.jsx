@@ -7,7 +7,7 @@ import {
   deleteSelectionProductOnCartDispatch,
   removeQuantityDispatch,
   selectProductOnCartDispatch,
-} from '../redux/cartSlice';
+} from '../redux/reducers/cartSlice';
 
 const ProductItem = React.memo(({product}) => {
   const dispatch = useDispatch();
@@ -18,8 +18,6 @@ const ProductItem = React.memo(({product}) => {
   const selectedProductOnCartReducer = useSelector(
     state => state.cart.selectedProductOnCartReducer[product.id] || false,
   );
-
-  console.log('wewewe22', product.id);
 
   const selectProductOnCart = useCallback(() => {
     dispatch(selectProductOnCartDispatch(product.id));

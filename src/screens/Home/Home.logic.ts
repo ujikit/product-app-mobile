@@ -12,7 +12,7 @@ const HomeScreenLogic = (props: HomeScreenProps) => {
 
   const dispatch = useDispatch();
 
-  const {products} = useSelector(state => state.cart);
+  const {products} = useSelector(state => state.product);
 
   const {navigator} = HomeScreenLogic.dependencies;
 
@@ -21,7 +21,7 @@ const HomeScreenLogic = (props: HomeScreenProps) => {
   } as any);
 
   useEffect(() => {
-    dispatch({type: 'cart/fetchProducts'});
+    dispatch({type: 'product/fetchProducts'});
   }, [dispatch]);
 
   return {

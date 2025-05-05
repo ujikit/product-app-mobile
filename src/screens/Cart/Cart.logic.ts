@@ -1,21 +1,15 @@
 //package import here
-import {useEffect, useMemo} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useMemo} from 'react';
+import {useSelector} from 'react-redux';
 
 //local import here
 import {CartScreenProps} from './Cart.types';
 
 const CartScreenLogic = (props: CartScreenProps) => {
-  const dispatch = useDispatch();
   const {cartReducer, quantityReducer, selectedProductOnCartReducer} =
     useSelector(state => state.cart);
-  const memoizedProducts = useMemo(() => cartReducer, [cartReducer]);
 
-  useEffect(() => {
-    dispatch({type: 'quantityReducer/fetchProducts'});
-  }, [dispatch]);
-
-  console.log('home');
+  const memoizedCart = useMemo(() => cartReducer, [cartReducer]);
 
   const totalSelectedPrice = useMemo(() => {
     return cartReducer.reduce((sum, product) => {
@@ -29,7 +23,7 @@ const CartScreenLogic = (props: CartScreenProps) => {
   }, [cartReducer, quantityReducer, selectedProductOnCartReducer]);
 
   return {
-    data: {memoizedProducts, totalSelectedPrice},
+    data: {memoizedCart, totalSelectedPrice},
     actions: {},
   };
 };
