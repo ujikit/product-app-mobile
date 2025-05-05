@@ -12,7 +12,7 @@ import {DetailScreenProps} from './Detail.types';
 const DetailScreenScreen = (props: DetailScreenProps) => {
   const {navigation} = props;
 
-  const {data} = DetailScreenLogic(props);
+  const {actions, data} = DetailScreenLogic(props);
   const {productDetail} = data;
 
   return (
@@ -46,12 +46,14 @@ const DetailScreenScreen = (props: DetailScreenProps) => {
         </View>
       </ScrollView>
       <View style={styles.wrapFooter}>
-        <TouchableOpacity style={styles.buttonCenter}>
-          <CartIcon width="24" height="24" fill="#fff" />
+        <TouchableOpacity
+          onPress={actions._handleAddToCart}
+          style={styles.buttonCenter}>
+          <CartIcon width="30" height="30" fill="#fff" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonRight}>
-          <Text style={styles.rightText}>Buy Now Rp2.070.000</Text>
+          <Text style={styles.rightText}>Buy Now Rp{productDetail.price}</Text>
         </TouchableOpacity>
       </View>
     </View>

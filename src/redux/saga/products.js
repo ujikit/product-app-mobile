@@ -1,5 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {setProductsDispatch} from './cartSlice';
+
+import {setProductsDispatch} from '../cartSlice';
 
 function* fetchProductsSaga() {
   const res = yield call(fetch, 'https://dummyjson.com/products?limit=10');

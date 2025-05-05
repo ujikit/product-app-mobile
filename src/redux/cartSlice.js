@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   products: [],
-  cart: {},
+  cartReducer: [],
+  quantityReducer: {},
   selectedProductOnCartReducer: {},
 };
 
@@ -10,6 +11,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    // product
     setProductsDispatch(state, action) {
       state.products = action.payload;
     },
@@ -18,25 +20,30 @@ const cartSlice = createSlice({
       state.selectedProductOnCartReducer[id] =
         !state.selectedProductOnCartReducer[id];
     },
+    // cart
+    setCartDispatch(state, action) {
+      state.cartReducer = [action.payload, ...state.cartReducer];
+    },
     deleteSelectionProductOnCartDispatch(state, action) {
-      state.products = state.products.filter(
+      state.cartReducer = state.cartReducer.filter(
         item => item.id !== action.payload,
       );
     },
     addQuantityDispatch(state, action) {
       const id = action.payload;
-      state.cart[id] = (state.cart[id] || 0) + 1;
+      state.quantityReducer[id] = (state.quantityReducer[id] || 0) + 1;
     },
     removeQuantityDispatch(state, action) {
       const id = action.payload;
-      if (state.cart[id] > 0) {
-        state.cart[id] -= 1;
+      if (state.quantityReducer[id] > 0) {
+        state.quantityReducer[id] -= 1;
       }
     },
   },
 });
 
 export const {
+  setCartDispatch,
   setProductsDispatch,
   addQuantityDispatch,
   removeQuantityDispatch,

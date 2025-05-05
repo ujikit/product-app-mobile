@@ -1,6 +1,6 @@
 //package import here
 import React from 'react';
-import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
 import {COLORS} from '../../configs';
 import {ArrowLeftIcon} from '../../svgs';

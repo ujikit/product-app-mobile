@@ -12,7 +12,9 @@ import {
 const ProductItem = React.memo(({product}) => {
   const dispatch = useDispatch();
 
-  const quantity = useSelector(state => state.cart.cart[product.id] || 0);
+  const quantity = useSelector(
+    state => state.cart.quantityReducer[product.id] || 0,
+  );
   const selectedProductOnCartReducer = useSelector(
     state => state.cart.selectedProductOnCartReducer[product.id] || false,
   );

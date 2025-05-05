@@ -4,10 +4,12 @@ const DetailNavigator = (props: DetailScreenProps) => {
   const {navigation} = props;
 
   const goBack = () => navigation.goBack();
+  const goToCartScreen = () => navigation.navigate('CartScreen');
 
   return {
     navigation,
     goBack,
+    goToCartScreen,
   };
 };
 
