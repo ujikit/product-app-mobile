@@ -13,12 +13,12 @@ import {CartIcon} from '../../svgs';
 import {DUMMY_DATA} from '../../constants';
 import {COLORS, STYLES} from '../../configs';
 
-import styles from './Home.styles';
-import HomeScreenLogic from './Home.logic';
-import {HomeScreenProps} from './Home.types';
+import styles from './SearchList.styles';
+import SearchListScreenLogic from './SearchList.logic';
+import {SearchListScreenProps} from './SearchList.types';
 
-export default function App(props: HomeScreenProps) {
-  const {actions, data} = HomeScreenLogic(props);
+export default function App(props: SearchListScreenProps) {
+  const {actions, data} = SearchListScreenLogic(props);
 
   return (
     <View style={styles.container}>
@@ -102,7 +102,7 @@ export default function App(props: HomeScreenProps) {
       </SafeAreaView>
       <View style={styles.tabBar}>
         <View style={styles.wrapTextTab}>
-          <Text style={styles.textTab}>Home</Text>
+          <Text style={styles.textTab}>SearchList</Text>
         </View>
         <View style={styles.wrapTextTab}>
           <Text style={styles.textTab}>Trending</Text>

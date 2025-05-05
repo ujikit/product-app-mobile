@@ -4,12 +4,14 @@ import HomeScreen from '../screens/Home';
 import CartScreen from '../screens/Cart';
 import DetailScreen from '../screens/Detail';
 import SearchScreen from '../screens/Search';
+import SearchListScreen from '../screens/SearchList';
 
 export type StackParamList = {
-  HomeScreen: {id: string; name: string};
-  CartScreen: {id: string; name: string};
-  DetailScreen: {id: string; name: string};
-  SearchScreen: {id: string; name: string};
+  HomeScreen: any;
+  CartScreen: any;
+  DetailScreen: any;
+  SearchScreen: any;
+  SearchListScreen: any;
 };
 
 const {Navigator, Screen} = createStackNavigator<StackParamList>();
@@ -24,6 +26,7 @@ const Stack = () => (
     <Screen name="CartScreen" component={CartScreen} />
     <Screen name="DetailScreen" component={DetailScreen} />
     <Screen name="SearchScreen" component={SearchScreen} />
+    <Screen name="SearchListScreen" component={SearchListScreen} />
   </Navigator>
 );
 

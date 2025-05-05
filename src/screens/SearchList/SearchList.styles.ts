@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 //local import
 import {COLORS} from '../../configs';
 
-const HomeScreenStyles = StyleSheet.create({
+const SearchListScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -113,4 +113,4 @@ const HomeScreenStyles = StyleSheet.create({
   paddingBottom150: {paddingBottom: 150},
 });
 
-export default HomeScreenStyles;
+export default SearchListScreenStyles;

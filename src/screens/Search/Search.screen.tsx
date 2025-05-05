@@ -16,7 +16,7 @@ import {ArrowLeftIcon} from '../../svgs';
 const SearchScreenScreen = (props: SearchScreenProps) => {
   const {navigation} = props;
 
-  const {data} = SearchScreenLogic(props);
+  const {actions, data} = SearchScreenLogic(props);
 
   return (
     <View style={styles.container}>
@@ -27,11 +27,14 @@ const SearchScreenScreen = (props: SearchScreenProps) => {
             <ArrowLeftIcon />
           </TouchableOpacity>
           <TextInput
-            placeholder="charger aki"
+            placeholder="Search here..."
             style={styles.searchInput}
-            defaultValue="charger aki"
+            value={data.searchValue}
+            onChangeText={value => actions.setSearchValue(value)}
           />
-          <TouchableOpacity style={styles.searchButton}>
+          <TouchableOpacity
+            onPress={() => alert('This feature is currently disabled.')}
+            style={styles.searchButton}>
             <Text style={{color: '#fff'}}>Search</Text>
           </TouchableOpacity>
         </View>
