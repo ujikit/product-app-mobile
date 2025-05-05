@@ -11,25 +11,25 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     // product
-    selectProductOnCartDispatch(state, action) {
+    selectProductOnCartDispatch(state: any, action: any) {
       const id = action.payload;
       state.selectedProductOnCartReducer[id] =
         !state.selectedProductOnCartReducer[id];
     },
     // cart
-    setCartDispatch(state, action) {
+    setCartDispatch(state: any, action: any) {
       state.cartReducer = [action.payload, ...state.cartReducer];
     },
-    deleteSelectionProductOnCartDispatch(state, action) {
+    deleteSelectionProductOnCartDispatch(state: any, action: any) {
       state.cartReducer = state.cartReducer.filter(
-        item => item.id !== action.payload,
+        (item: any) => item.id !== action.payload,
       );
     },
-    addQuantityDispatch(state, action) {
+    addQuantityDispatch(state: any, action: any) {
       const id = action.payload;
       state.quantityReducer[id] = (state.quantityReducer[id] || 0) + 1;
     },
-    removeQuantityDispatch(state, action) {
+    removeQuantityDispatch(state: any, action: any) {
       const id = action.payload;
       if (state.quantityReducer[id] > 0) {
         state.quantityReducer[id] -= 1;

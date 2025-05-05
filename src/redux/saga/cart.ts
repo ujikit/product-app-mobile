@@ -2,7 +2,7 @@ import {put, takeEvery} from 'redux-saga/effects';
 
 import {setCartDispatch} from '../reducers/cartSlice';
 
-function* addToCartSaga(action) {
+function* addToCartSaga(action: any) {
   yield put(setCartDispatch(action.payload));
 }
 

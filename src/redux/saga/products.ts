@@ -2,9 +2,9 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 
 import {setProductsDispatch} from '../reducers/productSlice';
 
-function* fetchProductsSaga(action) {
-  const limit = 30;
-  let endpoint = '';
+function* fetchProductsSaga(action: any) {
+  const limit: number = 30;
+  let endpoint: any = '';
 
   if (action.payload === 'All') {
     endpoint = `https://dummyjson.com/products?limit=${limit}`;
